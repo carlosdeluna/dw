@@ -1,7 +1,8 @@
 from collections import defaultdict
-import pickle
 from dwave.system import EmbeddingComposite, DWaveSampler
 import dwave.inspector
+import pdb
+import scipy.io
 
 
 # Define the problem as two Python dictionaries:
@@ -49,8 +50,9 @@ sampler = EmbeddingComposite(DWaveSampler(solver={'qpu':True}))
 sampleset = sampler.sample_ising(h, J,
                                  num_reads = 20,
                                  label='Example - Simple Ocean Programs: Ising')
+print(type(sampleset))
 print(sampleset)
-with open('sampleset16.pkl', 'wb') as file:
-    pickle.dump(sampleset, file)
+
 dwave.inspector.show(sampleset)
+pdb.set_trace()
 input("Press Enter to continue...")
